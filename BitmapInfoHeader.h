@@ -5,6 +5,8 @@
 #include <cstdint>
 using namespace std;
 #pragma pack(2)
+
+namespace fractal {
 struct BitmapInfoHeader {
   // size of header
   int32_t headerSize{40};
@@ -32,4 +34,6 @@ struct BitmapInfoHeader {
   // number of important colors. 0 = all
   int32_t importantColors{0};
 };
+} // namespace fractal
+
 #endif
