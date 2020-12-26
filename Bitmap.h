@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 using namespace std;
+
 namespace fractal {
 class Bitmap {
 private:
@@ -18,4 +19,5 @@ public:
   ~Bitmap();
 };
 } // namespace fractal
+
 #endif

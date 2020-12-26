@@ -4,7 +4,7 @@
 
 #include <cstdint>
 using namespace std;
-#pragma pack(2)
+#pragma pack(push, 1)
 
 namespace fractal {
 struct BitmapInfoHeader {
@@ -34,6 +34,6 @@ struct BitmapInfoHeader {
   // number of important colors. 0 = all
   int32_t importantColors{0};
 };
-} // namespace fractal
-
+}  // namespace fractal
+#pragma pack(pop)
 #endif

@@ -4,6 +4,7 @@
 #define BITMAPFILEHEADER_H_
 #include <cstdint>
 using namespace std;
+#pragma pack(push, 1)
 namespace fractal {
 struct BitmapFileHeader {
   // signature
@@ -15,5 +16,6 @@ struct BitmapFileHeader {
   // offset from beginning of the file to the beginning of the bitmap data
   int32_t dataOffset;
 };
-} // namespace fractal
+}  // namespace fractal
+#pragma pack(pop)
 #endif
