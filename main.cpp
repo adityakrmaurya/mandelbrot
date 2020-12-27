@@ -1,6 +1,7 @@
 #include "Bitmap.h"
 #include "Mandelbrot.h"
 #include <iostream>
+#include <math.h>
 #include <memory>
 
 using namespace std;
@@ -41,7 +42,8 @@ int main() {
         hue += ((double)histogram[i]) / total;
       }
       uint8_t red = 0;
-      uint8_t green = hue * 255;
+      uint8_t green =
+          (iterations == Mandelbrot::MAX_ITERATIONS ? 0 : pow(255, hue));
       uint8_t blue = 0;
 
       bitmap.setPixel(x, y, red, green, blue);
