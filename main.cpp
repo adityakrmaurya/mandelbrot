@@ -1,11 +1,14 @@
-#include "Bitmap.h"
-#include "Mandelbrot.h"
-#include <iostream>
 #include <math.h>
+
+#include <iostream>
 #include <memory>
 
+#include "Bitmap.h"
+#include "Mandelbrot.h"
+#include "ZoomList.h"
 using namespace std;
 using namespace fractal;
+
 int main() {
   int const WIDTH = 800;
   int const HEIGHT = 600;
