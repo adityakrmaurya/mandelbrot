@@ -1,62 +1,17 @@
-#include <math.h>
-
 #include <iostream>
 #include <memory>
 
-#include "bitmap.h"
-#include "mandelbrot.h"
-#include "zoom_list.h"
-using namespace std;
-using namespace fractal;
-
+#include "fractal_creator.h"
 int main() {
   const int kWidth = 800;
   const int kHeight = 600;
-  ZoomList zoom_list(kWidth, kHeight);
-  zoom_list.Add(Zoom(kWidth / 2, kHeight / 2, 4.0 / kWidth));
-  zoom_list.Add(Zoom(302, kHeight - 190, 0.1));
-  zoom_list.Add(Zoom(256, kHeight - 116, 0.2));
-  zoom_list.Add(Zoom(399, kHeight - 291, 0.3));
-  Bitmap bitmap(kWidth, kHeight);
-  unique_ptr<int[]> histogram(new int[Mandelbrot::kMaxIterations]{0});
-  unique_ptr<int[]> iteration(new int[kWidth * kHeight]{0});
-  // configuration phase
-  for (int y = 0; y < kHeight; y++) {
-    for (int x = 0; x < kWidth; x++) {
-      // scaling hack:
-      // the fractal values ranges from -1 to 1 on both axis
-      double x_fractal = zoom_list.DoZoom(x, y).first;
-      double y_fractal = zoom_list.DoZoom(x, y).second;
-      int iterations = Mandelbrot::GetIterations(x_fractal, y_fractal);
-      // increment the value of that iteration in the array
-      iteration[x + y * kWidth] = iterations;
-      if (iterations != Mandelbrot::kMaxIterations) {
-        histogram[iterations]++;
-      }
-    }
-  }
-  // calculating total no of iterations not including those at MAX_ITERATION
-  int total = 0;
-  for (int i = 0; i < Mandelbrot::kMaxIterations; i++) {
-    total += histogram[i];
-  }
-  // implementation phase
-  for (int y = 0; y < kHeight; y++) {
-    for (int x = 0; x < kWidth; x++) {
-      int iterations = iteration[x + y * kWidth];
-      double hue = 0.0;
-      for (int i = 0; i < iterations; i++) {
-        hue += ((double)histogram[i]) / total;
-      }
-      uint8_t red = 0;
-      uint8_t green =
-          (iterations == Mandelbrot::kMaxIterations ? 0 : pow(255, hue));
-      uint8_t blue = 0;
-
-      bitmap.SetPixel(x, y, red, green, blue);
-    }
-  }
-  bitmap.Write("test.bmp");
-  cout << "Complete";
+  fractal::FractalCreator fractal_creator(kWidth, kHeight);
+  fractal_creator.AddZoom(fractal::Zoom(302, kHeight - 190, 0.1));
+  fractal_creator.AddZoom(fractal::Zoom(256, kHeight - 116, 0.2));
+  fractal_creator.CalculateIteration();
+  fractal_creator.CalculateTotalIterations();
+  fractal_creator.DrawFractal();
+  fractal_creator.WriteBitmap("test.bmp");
+  std::cout << "Complete" << std::endl;
   return 0;
 }
