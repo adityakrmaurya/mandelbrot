@@ -1,16 +1,13 @@
 #include "zoom_list.h"
-
-#include <iostream>  // temporary
 namespace fractal {
 ZoomList::ZoomList(int width, int height) : width_(width), height_(height) {}
 // adds the new zoom to the zoom vector
 // transform the axis or 2D plane
-void ZoomList::Add( const Zoom& zoom) {
+void ZoomList::Add(const Zoom& zoom) {
   zooms.push_back(zoom);
   x_center_ += (zoom.x_ - width_ / 2) * scale_;
   y_center_ += (zoom.y_ - height_ / 2) * scale_;
   scale_ *= zoom.scale_;
-  std::cout << x_center_ << ", " << y_center_ << std::endl;
 }
 std::pair<double, double> ZoomList::DoZoom(int x, int y) {
   double x_fractal = (x - width_ / 2) * scale_ + x_center_;

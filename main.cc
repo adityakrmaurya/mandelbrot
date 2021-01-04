@@ -14,6 +14,9 @@ int main() {
   const int kHeight = 600;
   ZoomList zoom_list(kWidth, kHeight);
   zoom_list.Add(Zoom(kWidth / 2, kHeight / 2, 4.0 / kWidth));
+  zoom_list.Add(Zoom(302, kHeight - 190, 0.1));
+  zoom_list.Add(Zoom(256, kHeight - 116, 0.2));
+  zoom_list.Add(Zoom(399, kHeight - 291, 0.3));
   Bitmap bitmap(kWidth, kHeight);
   unique_ptr<int[]> histogram(new int[Mandelbrot::kMaxIterations]{0});
   unique_ptr<int[]> iteration(new int[kWidth * kHeight]{0});
