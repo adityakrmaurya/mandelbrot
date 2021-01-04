@@ -12,6 +12,8 @@ using namespace fractal;
 int main() {
   const int kWidth = 800;
   const int kHeight = 600;
+  ZoomList zoom_list(kWidth, kHeight);
+  zoom_list.Add(Zoom(kWidth / 2, kHeight / 2, 4.0 / kWidth));
   Bitmap bitmap(kWidth, kHeight);
   unique_ptr<int[]> histogram(new int[Mandelbrot::kMaxIterations]{0});
   unique_ptr<int[]> iteration(new int[kWidth * kHeight]{0});
@@ -20,8 +22,8 @@ int main() {
     for (int x = 0; x < kWidth; x++) {
       // scaling hack:
       // the fractal values ranges from -1 to 1 on both axis
-      double x_fractal = (x - kWidth / 2 - 200) * 2.0 / kHeight;
-      double y_fractal = (y - kHeight / 2) * 2.0 / kHeight;
+      double x_fractal = zoom_list.DoZoom(x, y).first;
+      double y_fractal = zoom_list.DoZoom(x, y).second;
       int iterations = Mandelbrot::GetIterations(x_fractal, y_fractal);
       // increment the value of that iteration in the array
       iteration[x + y * kWidth] = iterations;
@@ -35,7 +37,6 @@ int main() {
   for (int i = 0; i < Mandelbrot::kMaxIterations; i++) {
     total += histogram[i];
   }
-
   // implementation phase
   for (int y = 0; y < kHeight; y++) {
     for (int x = 0; x < kWidth; x++) {
