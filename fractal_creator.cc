@@ -102,7 +102,7 @@ void FractalCreator::DrawFractal() {
 void FractalCreator::WriteBitmap(std::string name) { bitmap_->Write(name); }
 int FractalCreator::GetRange(int iterations) const {
   int range = 0;
-  for (int i = 1; i < ranges_.size(); ++i) {
+  for (size_t i = 1; i < ranges_.size(); ++i) {
     range = i;
     if (ranges_[i] > iterations) {
       break;
