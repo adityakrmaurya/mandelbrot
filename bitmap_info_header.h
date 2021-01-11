@@ -3,7 +3,6 @@
 #define BITMAPINFOHEADER_H_
 
 #include <cstdint>
-using namespace std;
 #pragma pack(push, 1)
 
 namespace fractal {

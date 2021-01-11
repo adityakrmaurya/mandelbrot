@@ -15,7 +15,7 @@ class Bitmap {
  public:
   Bitmap(int width, int height);
   void SetPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue);
-  bool Write(std::string filename);
+  bool Write(std::string const &filename);
   ~Bitmap();
 };
 }  // namespace fractal

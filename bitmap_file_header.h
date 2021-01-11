@@ -3,7 +3,6 @@
 #ifndef BITMAPFILEHEADER_H_
 #define BITMAPFILEHEADER_H_
 #include <cstdint>
-using namespace std;
 #pragma pack(push, 1)
 namespace fractal {
 struct BitmapFileHeader {
@@ -19,3 +18,4 @@ struct BitmapFileHeader {
 }  // namespace fractal
 #pragma pack(pop)
 #endif
+ 

@@ -3,7 +3,7 @@
 
 #include "fractal_creator.h"
 #include "rgb.h"
-int main() {
+auto main() -> int {
   const int kWidth = 800;
   const int kHeight = 600;
   fractal::FractalCreator fractal_creator(kWidth, kHeight);
