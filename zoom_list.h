@@ -6,8 +6,8 @@
 namespace fractal {
 class ZoomList {
  private:
-  int height_{0};
   int width_{0};
+  int height_{0};
   std::vector<Zoom> zooms;
   double x_center_{0}, y_center_{0}, scale_{1};
 
